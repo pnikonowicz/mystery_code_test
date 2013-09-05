@@ -1,4 +1,4 @@
-package code_test
+package convert
 
 object Converter {
   class ConvertException extends RuntimeException("invalid string format")

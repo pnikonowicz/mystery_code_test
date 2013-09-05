@@ -1,7 +1,8 @@
-package code_test
+package convert
 
 import org.scalatest.FlatSpec
-import code_test.Converter.ConvertException
+
+import convert.Converter.ConvertException;
 
 class ConverterTest extends FlatSpec {
 
