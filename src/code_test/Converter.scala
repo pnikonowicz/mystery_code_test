@@ -1,6 +1,8 @@
 package code_test
 
 object Converter {
+  class ConvertException extends RuntimeException("invalid string format")
+  
   trait Appendable {
     def append(number: Int): Int;
   }
@@ -46,6 +48,7 @@ object Converter {
       case '7' => Number(7)
       case '8' => Number(8)
       case '9' => Number(9)
+      case   _ => throw new ConvertException
     }
   }
 
@@ -53,7 +56,7 @@ object Converter {
     input match {
       case '+' => Some(Symbol(+_))
       case '-' => Some(Symbol(-_))
-      case _ => None
+      case   _ => None
     }
   }
 

@@ -1,6 +1,7 @@
 package code_test
 
 import org.scalatest.FlatSpec
+import code_test.Converter.ConvertException
 
 class ConverterTest extends FlatSpec {
 
@@ -32,6 +33,14 @@ class ConverterTest extends FlatSpec {
     val input = "+1"
 
     expect(1) {
+      Converter.stringToInt(input)
+    }
+  }
+  
+  "stringToInt" should "throw exception with invalid input" in {
+    val input = "f"
+      
+    intercept[ConvertException] {
       Converter.stringToInt(input)
     }
   }
