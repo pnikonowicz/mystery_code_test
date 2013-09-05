@@ -3,8 +3,8 @@ package convert
 object Converter {
   class ConvertException extends RuntimeException("invalid string format")
 
-  def stringToInt(input: String): Int = {
-    val firstCharThatMayBeASymbol = input.iterator.next
+  def stringToInteger(input: String): Int = {
+    val firstCharThatMayBeASymbol = input.charAt(0)
     val parsed = parseSymbol(firstCharThatMayBeASymbol) match {
       case Some(symbol) => input.iterator.drop(1).map(parseDecimal).toList :+ symbol
       case None => input.map(parseDecimal).toList
