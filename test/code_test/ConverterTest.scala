@@ -35,4 +35,10 @@ class ConverterTest extends FlatSpec {
       Converter.stringToInt(input)
     }
   }
+  
+  "symbol" should "convert to a negative number" in {
+    expect(-1) {
+      Converter.Symbol(-_).append(1)
+    }
+  }
 }
