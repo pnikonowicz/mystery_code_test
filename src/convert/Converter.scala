@@ -2,37 +2,14 @@ package convert
 
 object Converter {
   class ConvertException extends RuntimeException("invalid string format")
-  
-  trait Appendable {
-    def append(number: Int): Int;
-  }
-
-  case class Symbol(value: Int => Int) extends Appendable {
-    def append(number: Int): Int = {
-      value(number)
-    }
-  }
-
-  case class Number(value: Int) extends Appendable {
-    def append(number: Int): Int = {
-      shiftLeft(number) + value
-    }
-
-    def shiftLeft(input: Int): Int = {
-      input * 10
-    }
-  }
-
-  def mapToOperation(value: Char): Appendable = {
-    Number(value)
-  }
 
   def stringToInt(input: String): Int = {
-    val parsed = parseSymbol(input.iterator.next) match {
+    val firstCharThatMayBeASymbol = input.iterator.next
+    val parsed = parseSymbol(firstCharThatMayBeASymbol) match {
       case Some(symbol) => input.iterator.drop(1).map(parseDecimal).toList :+ symbol
       case None => input.map(parseDecimal).toList
     }
-    
+
     parsed.foldLeft(0)((acc, appendable) => appendable.append(acc))
   }
 
@@ -48,7 +25,7 @@ object Converter {
       case '7' => Number(7)
       case '8' => Number(8)
       case '9' => Number(9)
-      case   _ => throw new ConvertException
+      case _ => throw new ConvertException
     }
   }
 
@@ -56,7 +33,7 @@ object Converter {
     input match {
       case '+' => Some(Symbol(+_))
       case '-' => Some(Symbol(-_))
-      case   _ => None
+      case _ => None
     }
   }
 
