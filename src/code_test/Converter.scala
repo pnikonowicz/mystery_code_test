@@ -13,14 +13,14 @@ object Converter {
 
   case class Number(value: Char) extends Appendable {
     def append(number: Int): Int = {
-      shiftLeft(number) + charToDecimal(value)
+      shiftLeft(number) + decimalValue(value)
     }
 
     def shiftLeft(input: Int): Int = {
       input * 10
     }
 
-    def charToDecimal(input: Char): Int = {
+    def decimalValue(input: Char): Int = {
       input match {
         case '0' => 0
         case '1' => 1
