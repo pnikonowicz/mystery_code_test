@@ -6,14 +6,14 @@ object Converter {
   def stringToInteger(input: String): Int = {
     val firstCharThatMayBeASymbol = input.charAt(0)
     val parsed = parseSymbol(firstCharThatMayBeASymbol) match {
-      case Some(symbol) => input.iterator.drop(1).map(parseDecimal).toList :+ symbol
-      case None => input.map(parseDecimal).toList
+      case Some(symbol) => input.iterator.drop(1).map(parseNumber).toList :+ symbol
+      case None => input.map(parseNumber).toList
     }
 
     parsed.foldLeft(0)((acc, appendable) => appendable.append(acc))
   }
 
-  def parseDecimal(input: Char): Number = {
+  def parseNumber(input: Char): Number = {
     input match {
       case '0' => Number(0)
       case '1' => Number(1)
