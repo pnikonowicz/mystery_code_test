@@ -7,7 +7,10 @@ object Converter {
 
   case class Symbol(value: Char) extends Appendable {
     def append(number: Int): Int = {
-      3
+      value match {
+        case '+' => number
+        case '-' => -number
+      }
     }
   }
 
