@@ -1,17 +1,17 @@
 package code_test
 
 object Converter {
-  trait Operation {
+  trait Appendable {
     def append(number: Int): Int;
   }
 
-  case class Symbol(value: Char) extends Operation {
+  case class Symbol(value: Char) extends Appendable {
     def append(number: Int): Int = {
       3
     }
   }
 
-  case class Number(value: Char) extends Operation {
+  case class Number(value: Char) extends Appendable {
     def append(number: Int): Int = {
       shiftLeft(number) + charToDecimal(value)
     }
@@ -36,7 +36,7 @@ object Converter {
     }
   }
 
-  def mapToOperation(value: Char): Operation = {
+  def mapToOperation(value: Char): Appendable = {
     Number(value)
   }
 
