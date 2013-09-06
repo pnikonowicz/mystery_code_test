@@ -5,5 +5,5 @@ The solution to the string to int conversion can be found in Conversion.
 The solution to the Ternary tree insertion can be found in TernaryTreeOperations.
 
 
-string to int conversion is fairly straightforward.
+string to int conversion is fairly straightforward and usees some object oriented techniques (traits) that scala supports.
 TernaryTree insertion uses streams to keep the tree immutable which is a much more functional style appropriate for scala. 
