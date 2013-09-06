@@ -4,7 +4,7 @@ object Converter {
   class ConvertException extends RuntimeException("invalid string format")
 
   def stringToInteger(input: String): Int = {
-    val tokens:List[Appendable] = input.map(char => parseSymbol(char) match {
+    val tokens = input.map(char => parseSymbol(char) match {
       case Some(symbol) => symbol
       case None => parseNumber(char)
     }).toList
