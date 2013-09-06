@@ -6,4 +6,4 @@ The solution to the Ternary tree insertion can be found in TernaryTreeOperations
 
 
 string to int conversion is fairly straightforward.
-TernaryTree insertion uses streams in order to try and keep the tree immutable which is a much more functional style appropriate for scala. 
+TernaryTree insertion uses streams to keep the tree immutable which is a much more functional style appropriate for scala. 
