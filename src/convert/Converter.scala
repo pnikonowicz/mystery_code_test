@@ -4,15 +4,21 @@ object Converter {
   class ConvertException extends RuntimeException("invalid string format")
 
   def stringToInteger(input: String): Int = {
-    val firstCharThatMayBeASymbol = input.charAt(0)
-    val parsed = parseSymbol(firstCharThatMayBeASymbol) match {
-      case Some(symbol) => input.iterator.drop(1).map(parseNumber).toList :+ symbol
-      case None => input.map(parseNumber).toList
+    val tokens:List[Appendable] = input.map(char => parseSymbol(char) match {
+      case Some(symbol) => symbol
+      case None => parseNumber(char)
+    }).toList
+    
+    tokens match {
+      case (symbol:Symbol) :: tail => (foldNumbersToInt _ andThen symbol.append)(tail) 
+      case numbers => foldNumbersToInt(numbers) 
     }
-
-    parsed.foldLeft(0)((acc, appendable) => appendable.append(acc))
   }
 
+  def foldNumbersToInt(numbers:List[Appendable]) : Int = {
+    numbers.foldLeft(0)((int, appendable) => appendable.append(int))
+  }
+  
   def parseNumber(input: Char): Number = input match {
     case '0' => Number(0)
     case '1' => Number(1)
@@ -28,8 +34,8 @@ object Converter {
   }
 
   def parseSymbol(input: Char): Option[Symbol] = input match {
-    case '+' => Some(Symbol(+_))
-    case '-' => Some(Symbol(-_))
+    case '+' => Some(PlusSymbol)
+    case '-' => Some(MinusSymbol)
     case _ => None
   }
 
