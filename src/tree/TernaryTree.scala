@@ -1,5 +1,3 @@
 package tree
 
-class TernaryTree {
-
-}
+trait TernaryTree
