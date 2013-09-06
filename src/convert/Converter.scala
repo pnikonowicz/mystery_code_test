@@ -10,12 +10,12 @@ object Converter {
     }).toList
     
     tokens match {
-      case (symbol:Symbol) :: tail => (foldNumbersToInt _ andThen symbol.append)(tail) 
-      case numbers => foldNumbersToInt(numbers) 
+      case (symbol:Symbol) :: tail => (foldAppendablesToInt _ andThen symbol.append)(tail) 
+      case numbers => foldAppendablesToInt(numbers) 
     }
   }
 
-  def foldNumbersToInt(numbers:List[Appendable]) : Int = {
+  def foldAppendablesToInt(numbers:List[Appendable]) : Int = {
     numbers.foldLeft(0)((int, appendable) => appendable.append(int))
   }
   
